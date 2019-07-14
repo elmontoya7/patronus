@@ -1,0 +1,456 @@
+// $body-bg: #f3f5f9;
+// $body-bg: #fff;
+$body-bg: #f9fbfd;
+$body-color: #041b4a;
+
+// $primary: #0054a9;
+$primary: #0e5ccf; // primary color blue
+// $primary: #4053ff; //social kit color
+// $primary: #3058cd;
+$secondary: #6e84a3;
+$success: #00d97e;
+$info: #39afd1;
+// $warning: #fbc612;
+$warning: #f6c343;
+$danger: #e63757;
+$light: #edf2f9;
+$dark: #313a46;
+
+$border-radius: 5px;
+
+// Adding (!) an additional theme color (ex. classes btn-cool, bg-cool)
+$theme-colors: (
+ "cool": #2a3f81
+);
+
+$breadcrumb-divider: quote(">");
+
+$enable-responsive-font-sizes: true;
+
+// $font-family-base: Cerebri;
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+.badge {
+  padding: .35em .6em;
+}
+
+.badge-pill {
+  border-radius: 50px;
+}
+
+@each $color, $value in $theme-colors {
+  .badge-soft-#{$color} {
+    @include alert-variant(theme-color-level($color, -10),
+                           theme-color-level($color, -10),
+                           theme-color-level($color, 3));
+  }
+
+  .alert-#{$color} {
+    @include alert-variant(theme-color-level($color, -10),
+                           theme-color-level($color, -10),
+                           theme-color-level($color, 3));
+  }
+
+  .btn-soft-#{$color} {
+    @include button-variant(theme-color-level($color, -10), theme-color-level($color, -10));
+
+    &:focus,
+    &.focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows {
+        box-shadow: $btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq(theme-color-level($color, -10)), theme-color-level($color, -10), 5%), 1);
+      } @else {
+        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq(theme-color-level($color, -10)), theme-color-level($color, -10), 5%), 1);
+      }
+    }
+  }
+
+  .alert-solid-#{$color} {
+    @include alert-variant(theme-color-level($color, 0),
+                           theme-color-level($color, 0),
+                           white);
+  }
+
+  .hover-#{$color} {
+    &:hover:not([disabled]), &:focus:not([disabled]) {
+      color: $value !important;
+    }
+  }
+}
+
+$sizes: 0 1 2;
+@each $size, $value in $sizes {
+  .b-#{$size} {
+    border: #{$size}px solid #e3ebf6;
+  }
+
+  .bt-#{$size} {
+    border-top: #{$size}px solid #e3ebf6;
+  }
+
+  .bb-#{$size} {
+    border-bottom: #{$size}px solid #e3ebf6;
+  }
+
+  .bl-#{$size} {
+    border-left: #{$size}px solid #e3ebf6;
+  }
+
+  .br-#{$size} {
+    border-right: #{$size}px solid #e3ebf6;
+  }
+
+  .by-#{$size} {
+    border-top: #{$size}px solid #e3ebf6;
+    border-bottom: #{$size}px solid #e3ebf6;
+  }
+
+  .bx-#{$size} {
+    border-left: #{$size}px solid #e3ebf6;
+    border-right: #{$size}px solid #e3ebf6;
+  }
+}
+
+.alert-solid-light, .alert-solid-warning {
+  color: #283e59;
+}
+
+.card {
+  margin-bottom: 1.5rem;
+  border-color: #edf2f9;
+  box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);
+}
+
+.card-header {
+  background-color: initial;
+  border-bottom: 1px solid #edf2f9;
+}
+
+.card-inactive {
+  border-color: #e3ebf6;
+  border-style: dashed;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.breadcrumb {
+  background-color: transparent;
+}
+
+.btn-white {
+  border-color: #e3ebf6;
+
+  &:hover {
+    background-color: #f9fbfd;
+    border-color: #d2ddec;
+  }
+}
+
+.input-group-text {
+  background-color: initial;
+}
+
+.text-help {
+  color: #95aac9;
+}
+
+.text-sm {
+  font-size: 13px;
+}
+
+.header {
+  margin-bottom: 2rem;
+
+  .header-body {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+
+    .header-pretitle {
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #95aac9;
+    }
+
+    .header-title {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    margin-top: 2.25rem;
+  }
+}
+
+.table thead th {
+  background-color: #f9fbfd;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: $secondary;
+  border-bottom: 1px solid #edf2f9;
+}
+
+.table th, .table td {
+  border-bottom: 1px solid #edf2f9;
+  border-top: 1px solid #edf2f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f9fbfd;
+}
+
+.table-hover[selectable] tbody tr:hover {
+  cursor: pointer;
+}
+
+.b-table-selectable tr {
+  outline: none !important;
+}
+
+.dropdown-toggle::after {
+  width: auto;
+  height: auto;
+  border: none!important;
+  vertical-align: middle;
+  font-family: feather;
+  font-weight: 700;
+  content: "\e842";
+}
+
+.form-control-flush {
+  padding: 0;
+  border-width: 0;
+  background-color: transparent;
+
+  &:focus {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.card-table thead th {
+  border-top: 0;
+
+  &:first-child {
+    padding-left: 1.5rem;
+  }
+
+  &:last-child {
+    padding-right: 1.5rem;
+  }
+}
+
+.card-table tbody td {
+  &:first-child {
+    padding-left: 1.5rem;
+  }
+
+  &:last-child {
+    padding-right: 1.5rem;
+  }
+}
+
+.card-table .table {
+  margin-bottom: 0;
+}
+
+.icon-sm {
+  width: 15px;
+  height: 15px;
+}
+
+.icon-md {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-link {
+  border-color: transparent !important;
+  color: #95aac9 !important;
+
+  &.active, &.router-link-exact-active {
+    color: #041b4a !important;
+  }
+}
+
+.nav-tabs {
+  .nav-link {
+    border-color: transparent !important;
+    color: #95aac9 !important;
+
+    &.active, &.router-link-exact-active {
+      color: #041b4a !important;
+      border-bottom: 1px solid #007bff !important;
+    }
+  }
+}
+
+.list-group-flush {
+  .list-group-item {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #edf2f9;
+    }
+  }
+}
+
+hr {
+  border-top: 1px solid #edf2f9;
+}
+
+@media (max-width: 425px) {
+  .el-message {
+    min-width: 300px !important;
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+}
+
+.table-nowrap td, .table-nowrap th {
+  white-space: nowrap;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+.breadcrumb-item {
+  font-size: 0.8rem;
+}
+
+.breadcrumb {
+  border-radius: 0 !important;
+}
+
+.input-group {
+  // .form-control {
+  //   &:not(:first-child) {
+  //     border-left: 1px solid white;
+  //   }
+  //
+  //   &:not(:last-child) {
+  //     border-right: 1px solid white;
+  //   }
+  //
+  //   &:focus {
+  //     border: 1px solid #68a1f5;
+  //   }
+  // }
+
+  .input-group-prepend, .input-group-append {
+    background-color: white;
+
+    .b-input-group-text {
+      background-color: white;
+    }
+  }
+}
+
+.scrollable-area::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.scrollable-area::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.scrollable-area::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(158, 165, 171, 0.2);
+}
+
+fieldset.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.pointer:not([disabled]) {
+  cursor: pointer;
+}
+
+.d-flex {
+  min-width: 0;
+}
+
+.overflow-y {
+  overflow-y: auto !important;
+}
+
+.overflow-x {
+  overflow-x: auto !important;
+}
+
+$sizes: 0 10 20 30 40 50 60 70 80 90 100;
+// responsive breakpoints for overflow-y, width and height
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .overflow#{$infix}-y   { overflow-y: auto !important; }
+
+    .overflow#{$infix}-x   { overflow-x: auto !important; }
+
+    .h#{$infix}-100   { height: 100% !important; }
+    .w#{$infix}-100   { width: 100% !important; }
+
+    @each $size in $sizes {
+      .mw#{$infix}-#{$size} {
+        max-width: #{$size + "%"};
+      }
+    }
+  }
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.custom-control.custom-checkbox.text-truncate {
+  padding-left: 27px;
+}
+
+@each $size, $value in $sizes {
+  .opacity-#{$size} {
+    @if ($size == 0) {
+      opacity: 0;
+    } @else {
+      opacity: ($size / 100);
+    }
+  }
+}
+
+.messenger-text {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f1f0f0;
+  border-radius: 1.3rem;
+  word-break: break-word;
+  max-width: 60%;
+
+  &.user {
+    background-color: #0099ff;
+    color: white;
+  }
+}
+
+@media (max-width: 425px) {
+  .messenger-text {
+    max-width: 100%;
+  }
+}
+
+.text-underline {
+  text-decoration: underline;
+}

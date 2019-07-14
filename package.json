@@ -7,16 +7,26 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@google/markerclusterer": "^1.0.3",
+    "bootstrap-vue": "^2.0.0-rc.19",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
+    "vue-awesome": "^3.5.4",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.4.4",
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
-    "node-sass": "^4.9.0",
+    "bootstrap": "^4.3.1",
+    "mutationobserver-shim": "^0.3.3",
+    "node-sass": "^4.12.0",
+    "popper.js": "^1.15.0",
+    "portal-vue": "^2.1.4",
     "sass-loader": "^7.1.0",
+    "vue-cli-plugin-bootstrap-vue": "^0.4.0",
+    "vue-cli-plugin-pug": "^1.0.7",
     "vue-template-compiler": "^2.6.10"
   }
 }
