@@ -30,7 +30,7 @@
           template(slot="first")
             option(value="") -- Selecciona una categoría --
     b-modal(title="Filtrar reportes", ok-title="Aplicar", v-model="filters_modal")
-      b-table(selectable, select-mode="single", :items="categories", :fields="['icon', 'text']")
+      b-table(selectable, select-mode="single", :items="categories", :fields="['icon', 'text']", @row-selected="rowSelected")
         template(slot="icon", slot-scope="{ item }")
           v-icon(:name="item.icon")
         template(slot="text", slot-scope="{ item }")
@@ -116,7 +116,13 @@ export default {
       heatmap: null,
       marker_modal: false,
       filters_modal: false,
+      filter: '',
       categories: [
+        {
+          text: 'Ninguna',
+          value: '',
+          icon: 'border-none'
+        },
         {
           text: 'Violencia',
           value: 'violence',
@@ -411,10 +417,22 @@ export default {
         // this.setMarkersOnMap(this.map)
       }
     },
-    setMarkersOnMap (map) {
+    setMarkersOnMap () {
       for (var i = 0; i < this.markers.length; i++) {
-        this.markers[i].setMap(map);
+        if (this.filter) {
+          if (this.markers[i].category_name == this.filter) {
+            this.markers[i].setMap(this.map);
+          } else {
+            this.markers[i].setMap(null);
+          }
+        } else {
+          this.markers[i].setMap(this.map);
+        }
       }
+    },
+    rowSelected (row) {
+      this.filter = row[0].value
+      this.setMarkersOnMap()
     },
     exportCSV () {
       exportCSVFile({
